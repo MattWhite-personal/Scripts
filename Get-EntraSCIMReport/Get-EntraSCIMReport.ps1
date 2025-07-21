@@ -8,10 +8,10 @@
     .PARAMETER reportAll
     If set to true, the report will include Service Principals that do not have SCIM synchronization jobs configured.
     .EXAMPLE
-    .\Get-EntraIdServicePrincipalScimReport.ps1 -exportPath "C:\Reports\SCIMReport.csv" -reportAll $true
+    .\Get-EntraScimReport.ps1 -exportPath "C:\Reports\SCIMReport.csv" -reportAll $true
     Gets all Service Principals and generates a report including those without SCIM synchronization jobs, exporting it to the specified path.
     .EXAMPLE
-    .\Get-EntraIdServicePrincipalScimReport.ps1 -exportPath "C:\Reports\SCIMReport.csv"
+    .\Get-EntraScimReport.ps1 -exportPath "C:\Reports\SCIMReport.csv"
     Gets all Service Principals and generates a report only for those with SCIM synchronization jobs, exporting it to the specified path.
 
 #>
