@@ -11,6 +11,17 @@ Welcome to the **Scripts** repository! This collection is designed to serve the 
 
 This modular structure enables easy navigation, understanding, and collaboration for users and contributors alike.
 
+## Script Index
+
+| Script | Description | Blog Post |
+|--------------|-------------|-------------|
+| [Get-ADInactiveAccounts](./Get-ADInactiveAccounts/README.md) | Create a report on accounts in an on premises Active Directory forest that have not been used in a prescribed number of days | [Link](https://matthewjwhite.co.uk/2015/10/27/reporting-on-inactive-ad-user-accounts/)
+| [Get-ADPasswordLastChanged](./Get-ADPasswordLastChanged/README.md) | Create a report on accounts and when their password was last rotated | [Link](https://matthewjwhite.co.uk/2015/10/27/reporting-on-ad-users-last-password-change/)
+| [Get-EntraSCIMReport](./Get-EntraSCIMReport/README.md) | Create a report on Enterprise Applications in an Entra tenant that are configured for SCIM provisioning | [Link](https://matthewjwhite.co.uk/2025/07/12/entra-scim-report/)
+| [New-IntuneLogonScriptScheduledTask](./New-IntuneLogonScriptScheduledTask/README.md) | Intune Platform script to install another script as a scheduled task to run at user logon. A *modern* approach to Group Policy login scripts | [Link](https://matthewjwhite.co.uk/2019/04/07/mapping-legacy-files-shares-for-azure-ad-joined-devices/)
+| [Set-TimeZoneGeoIP](./Set-TimeZoneGeoIP/README.md) | Use Geo IP data to set the timezone on a Windows device | [Link](https://matthewjwhite.co.uk/2019/04/18/intune-automatically-set-timezone-on-new-device-build/)
+| [Set-WindowsMappedDrives](./Set-WindowsMappedDrives/README.md) | A modern approach to replace logon scripts or Group Policy Processing for cloud native computers | [Link](https://matthewjwhite.co.uk/2019/04/07/mapping-legacy-files-shares-for-azure-ad-joined-devices/)
+
 ## Usage
 
 1. **Browse the Repository:**  
