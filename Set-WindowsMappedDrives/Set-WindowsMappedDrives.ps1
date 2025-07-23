@@ -29,8 +29,8 @@ $dnsDomainName = "skunklab.co.uk" #This is the internal name of your AD Forest
 
 
 $Drivemappings = @( #Create a line below for each drive mapping that needs to be created.
-    @{"includeSecurityGroup" = "FOLDERPERM_FULL-ACCESS" ; "excludeSecurityGroup" = "" ; "driveLetter" = "T" ; "UNCPath" = "\\skunklab.co.uk\dfs\shared"},
-    @{"includeSecurityGroup" = "FOLDERPERM_ALL-STAFF" ; "excludeSecurityGroup" = "FOLDERPERM_FULL-ACCESS" ; "driveLetter" = "T" ; "UNCPath" = "\\skunklab.co.uk\dfs\shared\sharedaccess"}
+    @{"includeSecurityGroup" = "FOLDERPERM_FULL-ACCESS" ; "excludeSecurityGroup" = "" ; "driveLetter" = "T" ; "UNCPath" = "\\skunklab.co.uk\dfs\shared" },
+    @{"includeSecurityGroup" = "FOLDERPERM_ALL-STAFF" ; "excludeSecurityGroup" = "FOLDERPERM_FULL-ACCESS" ; "driveLetter" = "T" ; "UNCPath" = "\\skunklab.co.uk\dfs\shared\sharedaccess" }
 )
 
 # Add required assemblies
@@ -133,7 +133,7 @@ $uri = "https://graph.microsoft.com/v1.0/me/memberOf"
 $method = "GET"
 
 # Run Graph API query
-$query = Invoke-WebRequest -Method $method -Uri $uri -ContentType "application/json" -Headers @{Authorization = "Bearer $token"} -ErrorAction Stop
+$query = Invoke-WebRequest -Method $method -Uri $uri -ContentType "application/json" -Headers @{Authorization = "Bearer $token" } -ErrorAction Stop
 $output = ConvertFrom-Json $query.Content
 $usergroups = @()
 foreach ($group in $output.value) {
@@ -142,31 +142,31 @@ foreach ($group in $output.value) {
 
 # Loop the Drive Mappings and check group membership
 
-$connected=$false
-$retries=0
-$maxRetries=3
+$connected = $false
+$retries = 0
+$maxRetries = 3
 
 Write-Output "Starting script..."
 do {
     if (Resolve-DnsName $dnsDomainName -ErrorAction SilentlyContinue) {
-        $connected=$true
+        $connected = $true
     }
     else {
         $retries++
         Write-Warning "Cannot resolve: $dnsDomainName, assuming no connection to fileserver"
         Start-Sleep -Seconds 3
-        if ($retries -eq $maxRetries){
+        if ($retries -eq $maxRetries) {
             Throw "Exceeded maximum numbers of retries ($maxRetries) to resolve dns name ($dnsDomainName)"
         }
     }
 }
-while( -not ($Connected))
+while ( -not ($Connected))
 
 Write-Output $usergroups
 
-$drivemappings.GetEnumerator()| ForEach-Object {
+$drivemappings.GetEnumerator() | ForEach-Object {
     Write-Output $PSItem.UNCPath
-    if(($usergroups.contains($PSItem.includeSecurityGroup)) -and ($usergroups.contains($PSItem.excludeSecurityGroup) -eq $false)) {
+    if (($usergroups.contains($PSItem.includeSecurityGroup)) -and ($usergroups.contains($PSItem.excludeSecurityGroup) -eq $false)) {
         Write-Output "Attempting to map $($Psitem.DriveLetter) to $($PSItem.UNCPath)"
         New-PSDrive -PSProvider FileSystem -Name $PSItem.DriveLetter -Root $PSItem.UNCPath -Persist -Scope global
     }

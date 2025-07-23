@@ -5,7 +5,7 @@
     DATE:           2019-04-06
     USAGE:          Edit the values in the first section with respect to your link to the script
                     Add in the name of the scheduled task that you want to be called
-                    Uplod the script to Intune to execute as a system context script
+                    Upload the script to Intune to execute as a system context script
 
 #>
 
@@ -38,13 +38,13 @@ $taskName = "<<scheduled-task-name>>" #enter the name for your scheduled task
 
 
 $schedTaskCommand = "Invoke-Expression ((New-Object Net.WebClient).DownloadString($([char]39)$($scriptLocation)$([char]39)))"
-$schedTaskArgs= "-ExecutionPolicy Bypass -windowstyle hidden -command $($schedTaskCommand)"
+$schedTaskArgs = "-ExecutionPolicy Bypass -windowstyle hidden -command $($schedTaskCommand)"
 $schedTaskExists = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
-If (($schedTaskExists)-and (Get-ScheduledTask -TaskName $taskName).Actions.arguments -eq $schedTaskArgs){
+If (($schedTaskExists) -and (Get-ScheduledTask -TaskName $taskName).Actions.arguments -eq $schedTaskArgs) {
     Write-Output "Task Exists and names match"
 }
 Else {
-    if($schedTaskExists) {
+    if ($schedTaskExists) {
         Write-Output "OldTask: $((Get-ScheduledTask -TaskName $taskName).Actions.arguments)"
         Write-Output "NewTask: $($schedTaskCommand)"
         Write-Output "Deleting Scheduled Task"

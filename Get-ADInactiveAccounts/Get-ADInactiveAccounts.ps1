@@ -9,8 +9,10 @@ $reportfile = "$mydir\InactiveAccounts-$timestamp-$random.csv"
 Import-Module ActiveDirectory
 
 Search-ADAccount -UsersOnly -AccountInactive -TimeSpan "$InactiveDays" | `
-Get-ADUser -Properties Name, sAMAccountName, givenName, sn, userAccountControl,lastlogondate | `
-Where {($_.userAccountControl -band 2) -eq $False} | Select Name, sAMAccountName, givenName, sn,LastLogonDate | `
+    Get-ADUser -Properties Name, sAMAccountName, givenName, sn, userAccountControl,lastlogondate | `
+    Where-Object {($_.userAccountControl -band 2) -eq $False} | `
+    Select-Object Name, sAMAccountName, givenName, sn,LastLogonDate | `
+
 Export-Csv $reportfile -NoTypeInformation
 
 Write-Host -ForegroundColor White "Report written to $reportfile in current path."
