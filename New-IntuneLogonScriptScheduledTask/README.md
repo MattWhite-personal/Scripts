@@ -1,4 +1,3 @@
-```markdown
 # New-IntuneLogonScriptScheduledTask
 
 The **New-IntuneLogonScriptScheduledTask** PowerShell script creates a Scheduled Task that runs at user logon to execute a PowerShell script hosted in an Azure Blob Storage account. This solution is useful for environments where a system-context script is needed to perform tasks such as updating configurations, applying policies, or setting environment parameters upon user logon.
