@@ -15,5 +15,5 @@ Search-ADAccount -UsersOnly -AccountInactive -TimeSpan "$InactiveDays" | `
 
 Export-Csv $reportfile -NoTypeInformation
 
-Write-Host -ForegroundColor White "Report written to $reportfile in current path."
+Write-Output "Report written to $reportfile in current path."
 Get-Item $reportfile

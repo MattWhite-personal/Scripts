@@ -11,5 +11,5 @@ Get-ADUser -filter * -properties passwordlastset, passwordneverexpires | `
     select-object Name, passwordlastset, passwordneverexpires | `
     Export-csv -path $reportfile -NoTypeInformation
 
-Write-Host -ForegroundColor White "Report written to $reportfile in current path."
+Write-Output "Report written to $reportfile in current path."
 Get-Item $reportfile
