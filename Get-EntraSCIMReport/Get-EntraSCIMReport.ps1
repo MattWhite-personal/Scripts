@@ -59,10 +59,10 @@ try {
 
 # Check each Service Principal for SCIM synchronization jobs
 foreach ($sp in $sps) {
-    Write-Host "Checking Service Principal: $($sp.DisplayName) ($($sp.Id))"
+    Write-Output "Checking Service Principal: $($sp.DisplayName) ($($sp.Id))"
     $job = Get-MgServicePrincipalSynchronizationJob -ServicePrincipalId $sp.Id -ErrorAction SilentlyContinue
     if ($job) {
-        Write-Host "Found SCIM synchronization job for Service Principal: $($sp.DisplayName) ($($sp.Id))"
+        Write-Output "Found SCIM synchronization job for Service Principal: $($sp.DisplayName) ($($sp.Id))"
         $row = $reportTable.NewRow()
         $row.ServicePrincipalId = $sp.Id
         $row.ServicePrincipalDisplayName = $sp.DisplayName
@@ -70,7 +70,7 @@ foreach ($sp in $sps) {
         $reportTable.Rows.Add($row)
     }
     else {
-        Write-Host "No SCIM synchronization job found for Service Principal: $($sp.DisplayName) ($($sp.Id))"
+        Write-Output "No SCIM synchronization job found for Service Principal: $($sp.DisplayName) ($($sp.Id))"
         if ($reportAll) {
             $row = $reportTable.NewRow()
             $row.ServicePrincipalId = $sp.Id
